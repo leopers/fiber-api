@@ -3,6 +3,7 @@ package database
 import (
 	"log"
 
+	"github.com/leopers/fiber-api.git/models"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
@@ -25,7 +26,7 @@ func ConnectDb() {
 	db.Logger = logger.Default.LogMode(logger.Info)
 	log.Println("Running migrations...")
 
-	// TODO: Run migrations here
+	db.AutoMigrate(&models.User{}, &models.Product{}, &models.Order{})
 
 	database = DbInstance{Db: db}
 }
